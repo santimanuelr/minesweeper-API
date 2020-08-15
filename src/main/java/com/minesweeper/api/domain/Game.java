@@ -68,6 +68,25 @@ public class Game implements Serializable {
 		placeNumbers();
 	}
     
+    public Game(int rows, int columns, int mines) {
+		super();
+		this.name = DEFAULT_NAME + Math.random() * 10;
+		this.x = columns;
+		this.y = rows;
+		this.lockers = new ArrayList<List<Locker>>(DEFAULT_LEGTH_Y);
+		for(int i = 0; i < DEFAULT_LEGTH_Y; i++) {
+			List<Locker> list = new ArrayList<Locker>(DEFAULT_LEGTH_X);
+			for(int j = 0; j < DEFAULT_LEGTH_X; j++) {
+				list.add(j, new Locker());
+			}
+			this.lockers.add(i, list);
+        }
+		this.minesCount = mines;
+		this.minesLocations = new ArrayList<Locker>(DEFAULT_MINES_COUNT);
+		addMines();
+		placeNumbers();
+	}
+    
 
 	private void addMines() {
 		
@@ -178,4 +197,13 @@ public class Game implements Serializable {
 	public void setLockers(List<List<Locker>> lockers) {
 		this.lockers = lockers;
 	}
+
+	public Integer getMinesCount() {
+		return minesCount;
+	}
+
+	public void setMinesCount(Integer minesCount) {
+		this.minesCount = minesCount;
+	}
+	
 }
