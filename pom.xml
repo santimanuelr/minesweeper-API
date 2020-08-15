@@ -17,6 +17,7 @@
 	<properties>
 		<java.version>11</java.version>
 		<springfox-swagger.version>2.9.2</springfox-swagger.version>
+		<cucumber.version>6.4.0</cucumber.version>
 	</properties>
 
 	<dependencies>
@@ -27,6 +28,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.jeasy/easy-rules-core -->
+		<dependency>
+		    <groupId>org.jeasy</groupId>
+		    <artifactId>easy-rules-core</artifactId>
+		    <version>4.0.0</version>
 		</dependency>
 		
 		<!-- swagger -->
@@ -40,23 +48,38 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>${springfox-swagger.version}</version>
 		</dependency>
-
+		
+		<!-- Testing -->
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>de.flapdoodle.embed</groupId>
 			<artifactId>de.flapdoodle.embed.mongo</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <scope>test</scope>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <scope>test</scope>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-spring</artifactId>
+            <scope>test</scope>
+            <version>${cucumber.version}</version>
+        </dependency>
 	</dependencies>
 
 	<build>

@@ -1,16 +1,12 @@
 package com.minesweeper.api.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
-
-import com.minesweeper.api.domain.enume.LockerType;
-
-import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
  * A Game.
@@ -51,7 +47,7 @@ public class Game implements Serializable {
 
     public Game() {
 		super();
-		this.name = DEFAULT_NAME + Math.random() * 10;
+		this.name = DEFAULT_NAME + String.format("%.2f", Math.random() * 10);
 		this.x = DEFAULT_LEGTH_X;
 		this.y = DEFAULT_LEGTH_Y;
 		this.lockers = new ArrayList<List<Locker>>(DEFAULT_LEGTH_Y);
@@ -64,59 +60,26 @@ public class Game implements Serializable {
         }
 		this.minesCount = DEFAULT_MINES_COUNT;
 		this.minesLocations = new ArrayList<Locker>(DEFAULT_MINES_COUNT);
-		addMines();
-		placeNumbers();
 	}
     
-
-	private void addMines() {
-		
-		Random random = new Random();
-	    int mines = this.minesCount;
-	    
-	    while (mines > 0) {
-	      int x1 = random.nextInt(this.x - 1);
-	      int y1 = random.nextInt(this.y - 1);
-	      Locker locker = this.lockers.get(y1).get(x1);
-	      if (locker == null || !LockerType.BOMB.equals(locker.getType())) {
-	    	Locker bomb = new BombLocker();
-	    	this.lockers.get(y1).set(x1, bomb);
-	        this.minesLocations.add(bomb);
-	        mines--;
-	      }
-	    }
-	    
-	}
-	
-	public void placeNumbers() {
-	    for (int i = 0; i < this.y; i++) {
-	      for (int j = 0; j < this.x; j++) {
-	    	Locker locker = this.lockers.get(i).get(j);
-	    	if (LockerType.BOMB.equals(locker.getType())) {
-	          continue;
-	        }
-	        int counter = 0;
-	        for (int xOffset = -1; xOffset < 2; xOffset++) {
-	          for (int yOffset = -1; yOffset < 2; yOffset++) {
-	            int tmpX = i + xOffset;
-	            int tmpY = j + yOffset;
-	            if (isValidCell(tmpX, tmpY) && LockerType.BOMB.equals(this.lockers.get(tmpY).get(tmpX).getType())) {
-	              counter++;
-	            }
-	          }
-	        }
-	        if (counter == 0) {
-	        	locker.setType(LockerType.BLANK);
-			} else {
-				locker = new NumberLocker(counter);
+    public Game(int rows, int columns, int mines) {
+		super();
+		this.name = DEFAULT_NAME + Math.random() * 10;
+		this.x = columns;
+		this.y = rows;
+		this.lockers = new ArrayList<List<Locker>>(DEFAULT_LEGTH_Y);
+		for(int i = 0; i < DEFAULT_LEGTH_Y; i++) {
+			List<Locker> list = new ArrayList<Locker>(DEFAULT_LEGTH_X);
+			for(int j = 0; j < DEFAULT_LEGTH_X; j++) {
+				list.add(j, new Locker());
 			}
-	        locker.setPoint(new Point(j, i));
-	        this.lockers.get(i).set(j, locker);
-	      }
-	    }
+			this.lockers.add(i, list);
+        }
+		this.minesCount = mines;
+		this.minesLocations = new ArrayList<Locker>(DEFAULT_MINES_COUNT);
 	}
 
-	boolean isValidCell(int x, int y) {
+	public boolean isValidCell(int x, int y) {
 	    if (x >= 0 && y >= 0 && x < this.x && y < this.y) {
 	      return true;
 	    }
@@ -178,4 +141,37 @@ public class Game implements Serializable {
 	public void setLockers(List<List<Locker>> lockers) {
 		this.lockers = lockers;
 	}
+
+	public Integer getMinesCount() {
+		return minesCount;
+	}
+
+	public void setMinesCount(Integer minesCount) {
+		this.minesCount = minesCount;
+	}
+
+	public List<Locker> getMinesLocations() {
+		return minesLocations;
+	}
+
+	public void setMinesLocations(List<Locker> minesLocations) {
+		this.minesLocations = minesLocations;
+	}
+
+	public Integer getX() {
+		return x;
+	}
+
+	public void setX(Integer x) {
+		this.x = x;
+	}
+
+	public Integer getY() {
+		return y;
+	}
+
+	public void setY(Integer y) {
+		this.y = y;
+	}
+	
 }
