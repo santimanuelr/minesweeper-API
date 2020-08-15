@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.minesweeper.api.domain.Game;
-import com.minesweeper.api.repository.GameRepository;
+import com.minesweeper.api.service.GameService;
 
 /**
  * REST controller for managing {@link com.minesweeper.api.domain.Game}.
@@ -37,11 +38,8 @@ public class GameResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private final GameRepository gameRepository;
-
-    public GameResource(GameRepository gameRepository) {
-        this.gameRepository = gameRepository;
-    }
+    @Autowired
+    private GameService gameService;
 
     /**
      * {@code POST  /games} : Create a new game.
@@ -56,7 +54,7 @@ public class GameResource {
         if (game.getId() != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "A new game cannot already have an ID");
         }
-        Game result = gameRepository.save(game);
+        Game result = gameService.save(game);
         return ResponseEntity.created(new URI("/api/games/" + result.getId()))
             .body(result);
     }
@@ -76,7 +74,7 @@ public class GameResource {
         if (game.getId() == null) {
         	throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid id");
         }
-        Game result = gameRepository.save(game);
+        Game result = gameService.save(game);
         return ResponseEntity.ok()
             .body(result);
     }
@@ -89,7 +87,7 @@ public class GameResource {
     @GetMapping("/games")
     public List<Game> getAllGames() {
         log.debug("REST request to get all Games");
-        return gameRepository.findAll();
+        return gameService.findAll();
     }
 
     /**
@@ -101,7 +99,7 @@ public class GameResource {
     @GetMapping("/games/{id}")
     public ResponseEntity<Game> getGame(@PathVariable String id) {
         log.debug("REST request to get Game : {}", id);
-        Optional<Game> game = gameRepository.findById(id);
+        Optional<Game> game = gameService.findById(id);
         return game.map(response -> ResponseEntity.ok().body(response))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
@@ -115,7 +113,7 @@ public class GameResource {
     @DeleteMapping("/games/{id}")
     public ResponseEntity<Void> deleteGame(@PathVariable String id) {
         log.debug("REST request to delete Game : {}", id);
-        gameRepository.deleteById(id);
+        gameService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }

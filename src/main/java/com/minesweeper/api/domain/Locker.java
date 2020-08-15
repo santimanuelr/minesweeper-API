@@ -12,7 +12,7 @@ import java.io.Serializable;
 /**
  * A Locker.
  */
-@Document(collection = "locker")
+//@Document(collection = "locker")
 public class Locker implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -21,12 +21,22 @@ public class Locker implements Serializable {
     private String id;
 
     @Field("type")
-    private LockerType type;
+    protected LockerType type;
     
     @Field("point")
     private Point point;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
+    
+    
+    public Point getPoint() {
+		return point;
+	}
+
+	public void setPoint(Point point) {
+		this.point = point;
+	}
+
+	// jhipster-needle-entity-add-field - JHipster will add fields here
     public String getId() {
         return id;
     }
