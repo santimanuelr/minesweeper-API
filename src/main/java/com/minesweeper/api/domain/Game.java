@@ -116,7 +116,7 @@ public class Game implements Serializable {
 	    }
 	}
 
-	boolean isValidCell(int x, int y) {
+	public boolean isValidCell(int x, int y) {
 	    if (x >= 0 && y >= 0 && x < this.x && y < this.y) {
 	      return true;
 	    }

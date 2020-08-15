@@ -29,6 +29,13 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/org.jeasy/easy-rules-core -->
+		<dependency>
+		    <groupId>org.jeasy</groupId>
+		    <artifactId>easy-rules-core</artifactId>
+		    <version>4.0.0</version>
+		</dependency>
+		
 		<!-- swagger -->
 		<dependency>
 			<groupId>io.springfox</groupId>

@@ -1,5 +1,6 @@
 package com.minesweeper.api.service;
 
+import java.awt.Point;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +15,8 @@ public interface GameService {
 	List<Game> findAll();
 
 	Optional<Game> findById(String id);
+	
+	Game play(Point point, Game game);
 
     //private final Logger log = LoggerFactory.getLogger(GameService.class);
 

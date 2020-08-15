@@ -1,13 +1,12 @@
 package com.minesweeper.api.domain;
 
+import java.awt.Point;
+import java.io.Serializable;
+
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import com.minesweeper.api.domain.enume.LockerType;
-
-import java.awt.Point;
-import java.io.Serializable;
 
 /**
  * A Locker.
@@ -26,6 +25,7 @@ public class Locker implements Serializable {
     @Field("point")
     private Point point;
 
+    private boolean revealed = false;
     
     
     public Point getPoint() {
@@ -83,4 +83,12 @@ public class Locker implements Serializable {
             ", type='" + getType() + "'" +
             "}";
     }
+
+	public boolean isRevealed() {
+		return revealed;
+	}
+
+	public void setRevealed(boolean revealed) {
+		this.revealed = revealed;
+	}
 }
