@@ -15,7 +15,9 @@ import org.springframework.stereotype.Service;
 
 import com.minesweeper.api.domain.Game;
 import com.minesweeper.api.repository.GameRepository;
+import com.minesweeper.api.rules.AddMines;
 import com.minesweeper.api.rules.CheckBlankLocker;
+import com.minesweeper.api.rules.PlaceNumbers;
 import com.minesweeper.api.service.GameService;
 
 @Service
@@ -57,7 +59,7 @@ public class GameServiceImpl implements GameService {
 		fact.put("game", game);
 		fact.put("point", point);
 		rulesEngine.fire(getPlayRules(), fact);
-		return null;
+		return game;
 	}
 
 	private Rules getPlayRules() {
@@ -66,4 +68,21 @@ public class GameServiceImpl implements GameService {
 		return rules;
 	}
 
+	
+	private Rules getCreateGameRules() {
+		Rules rules = new Rules();
+		rules.register(new AddMines());
+		rules.register(new PlaceNumbers());
+		return rules;
+	}
+
+	@Override
+	public Game createNewDefaultGame() {
+		RulesEngine rulesEngine = new DefaultRulesEngine();
+		Facts fact = new Facts();
+		Game game = new Game();
+		fact.put("game", game);
+		rulesEngine.fire(getCreateGameRules(), fact);
+		return game;
+	}
 }

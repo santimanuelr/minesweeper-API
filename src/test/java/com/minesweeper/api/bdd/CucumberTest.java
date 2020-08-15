@@ -2,8 +2,6 @@ package com.minesweeper.api.bdd;
 
 import org.junit.runner.RunWith;
 
-import com.minesweeper.api.ApiApplicationTests;
-
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 

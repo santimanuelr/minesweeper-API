@@ -7,7 +7,6 @@ import org.springframework.test.context.ContextConfiguration;
 
 @SpringBootTest(classes = ApiApplication.class, webEnvironment = WebEnvironment.DEFINED_PORT)
 @ContextConfiguration
-//@CucumberContextConfiguration
 public class ApiApplicationTests {
 
 	@Test

@@ -9,6 +9,8 @@ import com.minesweeper.api.domain.Game;
 public interface GameService {
 
 	Game save(Game newGame);
+	
+	Game createNewDefaultGame();
 
 	void deleteById(String id);
 
