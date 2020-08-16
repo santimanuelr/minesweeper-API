@@ -8,3 +8,10 @@ Feature: Game Minesweeper logic
 	    When the user starts new default game
 	    And the user marks the locker 7 6 with a question mark
 	    Then the board has a locker in row 7 and column 6 with a question mark
+	    And the board has a locker in row 7 and column 6 with no a flag mark
+	    
+    Scenario: User creates a new default game and mark a locker with a flag
+	    When the user starts new default game
+	    And the user marks the locker 7 6 with a flag mark
+	    Then the board has a locker in row 7 and column 6 with a flag mark
+	    And the board has a locker in row 7 and column 6 with no a question mark

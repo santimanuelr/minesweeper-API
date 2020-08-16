@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.minesweeper.api.domain.Game;
 import com.minesweeper.api.domain.LockerRequest;
 import com.minesweeper.api.service.GameService;
-import com.minesweeper.api.service.impl.GameServiceImpl;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -49,25 +48,35 @@ public class GameStepDefinitions {
 			case "question":
 				lockerRequest.setQuestion(Boolean.TRUE);
 				break;
+			case "flag":
+				lockerRequest.setFlag(Boolean.TRUE);
+				break;
 			default:
 				break;
 		}
 		gameService.play(lockerRequest, this.game);
     }
 	
-	@Then("^the board has a locker in row (\\d+) and column (\\d+) with a question mark$")
-	public void theBoardHasALockerWithQuestionMark(int row, int column) throws Throwable {
-		log.info("value: " + this.game.getLockers().get(row).get(column).isExposed());
-		assertFalse(this.game.getLockers().get(row).get(column).isExposed());
-		assertFalse(this.game.getLockers().get(row).get(column).isFlag());
-		assertTrue(this.game.getLockers().get(row).get(column).isQuestion());
+	@Then("^the board has a locker in row (\\d+) and column (\\d+) with (a|no a) question mark$")
+	public void theBoardHasALockerWithQuestionMark(int row, int column, String not) throws Throwable {
+		if (not.trim().equals("a")) {
+			assertFalse(this.game.getLockers().get(row).get(column).isExposed());
+			assertFalse(this.game.getLockers().get(row).get(column).isFlag());
+			assertTrue(this.game.getLockers().get(row).get(column).isQuestion());
+		} else {
+			assertFalse(this.game.getLockers().get(row).get(column).isQuestion());
+		}
     }
 	
-	@Then("^the board has a locker in row (\\d+) and column (\\d+) with a flag mark$")
-	public void theBoardHasALockerWithFlagMark(int row, int column) throws Throwable {
-		assertFalse(this.game.getLockers().get(row).get(column).isExposed());
-		assertFalse(this.game.getLockers().get(row).get(column).isQuestion());
-		assertTrue(this.game.getLockers().get(row).get(column).isFlag());
+	@Then("^the board has a locker in row (\\d+) and column (\\d+) with (a|no a) flag mark$")
+	public void theBoardHasALockerWithFlagMark(int row, int column, String not) throws Throwable {
+		if (not.trim().equals("a")) {
+			assertFalse(this.game.getLockers().get(row).get(column).isExposed());
+			assertFalse(this.game.getLockers().get(row).get(column).isQuestion());
+			assertTrue(this.game.getLockers().get(row).get(column).isFlag());
+		} else {
+			assertFalse(this.game.getLockers().get(row).get(column).isFlag());
+		}
     }
 	
 }

@@ -18,7 +18,7 @@ public class MarkQuestionLocker {
 	
 	@Condition
 	public boolean canMarkQuestionLocker(@Fact("request") LockerRequest lockerReq, @Fact("game") Game game) {
-		return !game.getLockers().get(lockerReq.getY()).get(lockerReq.getX()).isExposed();
+		return !game.getLockers().get(lockerReq.getY()).get(lockerReq.getX()).isExposed() && lockerReq.isQuestion();
 	}
 	
 	@Action
