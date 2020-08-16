@@ -1,15 +1,25 @@
 package com.minesweeper.api.bdd.stepdefs;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.minesweeper.api.domain.BombLocker;
 import com.minesweeper.api.domain.Game;
+import com.minesweeper.api.domain.Locker;
 import com.minesweeper.api.domain.LockerRequest;
+import com.minesweeper.api.domain.enume.GameStatus;
+import com.minesweeper.api.domain.enume.LockerType;
 import com.minesweeper.api.service.GameService;
 
 import io.cucumber.java.en.And;
@@ -57,6 +67,31 @@ public class GameStepDefinitions {
 		gameService.play(lockerRequest, this.game);
     }
 	
+	@And("^the user uncheck a locker with a bomb$")
+	public void theUserChecksABombLocker() throws Throwable {
+		Optional<List<Locker>> lockerList = game.getLockers().stream()
+				.filter(listRows -> listRows.stream().filter(l -> LockerType.BOMB.equals(l.getType())).findFirst().isPresent())
+				.findFirst();
+		Locker bombLocker = lockerList.get().stream()
+				.filter(l -> LockerType.BOMB.equals(l.getType()))
+				.findFirst()
+				.orElse(null);
+		assertNotNull(bombLocker);
+		int row = bombLocker.getPoint().y;
+		int column = bombLocker.getPoint().x;
+		LockerRequest lockerRequest = new LockerRequest(row, column);
+		lockerRequest.setExposed(Boolean.TRUE);
+		try {
+			gameService.play(lockerRequest, this.game);
+		} catch (Exception e) {
+			// TODO: handle exception
+			log.info("The game is lost");
+		}
+		//assertThr(Exception.class, gameService.play(lockerRequest, this.game));
+		//assertThrows("Game Over", Exception.class, gameService.play(lockerRequest, this.game));
+		//assertThrows(Exception.class, gameService.play(lockerRequest, this.game), "Game Over");
+    }
+	
 	@Then("^the board has a locker in row (\\d+) and column (\\d+) with (a|no a) question mark$")
 	public void theBoardHasALockerWithQuestionMark(int row, int column, String not) throws Throwable {
 		if (not.trim().equals("a")) {
@@ -77,6 +112,11 @@ public class GameStepDefinitions {
 		} else {
 			assertFalse(this.game.getLockers().get(row).get(column).isFlag());
 		}
+    }
+	
+	@Then("^the game is over$")
+	public void theGameIsOverAndLost() throws Throwable {
+		assertEquals(GameStatus.LOST, this.game.getGameStatus());
     }
 	
 }

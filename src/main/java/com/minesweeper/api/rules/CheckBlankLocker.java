@@ -1,7 +1,5 @@
 package com.minesweeper.api.rules;
 
-import java.awt.Point;
-
 import org.jeasy.rules.annotation.Action;
 import org.jeasy.rules.annotation.Condition;
 import org.jeasy.rules.annotation.Fact;
@@ -13,7 +11,7 @@ import com.minesweeper.api.domain.Game;
 import com.minesweeper.api.domain.LockerRequest;
 import com.minesweeper.api.domain.enume.LockerType;
 
-@Rule(name = "CheckBlankLocker", description = "Check if a given Point has a blank locker an shows all their neighboring lockers")
+@Rule(name = "CheckBlankLocker", description = "Check if a given Point has a blank locker and shows all their neighboring lockers")
 public class CheckBlankLocker {
 	
 	private final Logger log = LoggerFactory.getLogger(CheckBlankLocker.class);

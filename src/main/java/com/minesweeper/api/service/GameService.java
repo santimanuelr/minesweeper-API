@@ -18,6 +18,6 @@ public interface GameService {
 
 	Optional<Game> findById(String id);
 	
-	Game play(LockerRequest lr, Game game);
+	Game play(LockerRequest lr, Game game) throws Exception;
 
 }

@@ -39,7 +39,15 @@ public class Locker implements Serializable {
 	}
     
     
-    public Point getPoint() {
+    public Locker(Point point) {
+    	this.exposed = false;
+    	this.question = false;
+    	this.flag = false;
+    	this.point = point;
+	}
+
+
+	public Point getPoint() {
 		return point;
 	}
 

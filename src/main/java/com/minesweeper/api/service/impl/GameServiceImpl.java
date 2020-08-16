@@ -17,6 +17,7 @@ import com.minesweeper.api.domain.LockerRequest;
 import com.minesweeper.api.repository.GameRepository;
 import com.minesweeper.api.rules.AddMines;
 import com.minesweeper.api.rules.CheckBlankLocker;
+import com.minesweeper.api.rules.CheckBombLocker;
 import com.minesweeper.api.rules.MarkFlagLocker;
 import com.minesweeper.api.rules.MarkQuestionLocker;
 import com.minesweeper.api.rules.PlaceNumbers;
@@ -55,7 +56,7 @@ public class GameServiceImpl implements GameService {
 	}
 
 	@Override
-	public Game play(LockerRequest lr, Game game) {
+	public Game play(LockerRequest lr, Game game) throws Exception {
 		// TODO Auto-generated method stub
 		log.info("Start play with request x: {} - y: {}", lr.getX(), lr.getY());
 		RulesEngine rulesEngine = new DefaultRulesEngine();
@@ -68,6 +69,7 @@ public class GameServiceImpl implements GameService {
 
 	private Rules getPlayRules() {
 		Rules rules = new Rules();
+		rules.register(new CheckBombLocker());
 		rules.register(new CheckBlankLocker());
 		rules.register(new UncheckLocker());
 		rules.register(new MarkQuestionLocker());

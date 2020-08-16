@@ -1,5 +1,6 @@
 package com.minesweeper.api.rules;
 
+import java.awt.Point;
 import java.util.Random;
 
 import org.jeasy.rules.annotation.Action;
@@ -35,7 +36,7 @@ public class AddMines {
 	      int y1 = random.nextInt(game.getY() - 1);
 	      Locker locker = game.getLockers().get(y1).get(x1);
 	      if (locker == null || !LockerType.BOMB.equals(locker.getType())) {
-	    	Locker bomb = new BombLocker();
+	    	Locker bomb = new BombLocker(new Point(x1, y1));
 	    	game.getLockers().get(y1).set(x1, bomb);
 	        game.getMinesLocations().add(bomb);
 	        mines--;

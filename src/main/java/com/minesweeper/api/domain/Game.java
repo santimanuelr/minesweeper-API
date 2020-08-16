@@ -8,6 +8,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import com.minesweeper.api.domain.enume.GameStatus;
+
 /**
  * A Game.
  */
@@ -43,6 +45,8 @@ public class Game implements Serializable {
     @Field("minesLocations")
     private List<Locker> minesLocations;
     
+    @Field("status")
+    private GameStatus gameStatus;
     
 
     public Game() {
@@ -60,6 +64,7 @@ public class Game implements Serializable {
         }
 		this.minesCount = DEFAULT_MINES_COUNT;
 		this.minesLocations = new ArrayList<Locker>(DEFAULT_MINES_COUNT);
+		this.gameStatus = GameStatus.IN_PLAY;
 	}
     
     public Game(int rows, int columns, int mines) {
@@ -77,6 +82,7 @@ public class Game implements Serializable {
         }
 		this.minesCount = mines;
 		this.minesLocations = new ArrayList<Locker>(DEFAULT_MINES_COUNT);
+		this.gameStatus = GameStatus.IN_PLAY;
 	}
 
 	public boolean isValidCell(int x, int y) {
@@ -172,6 +178,14 @@ public class Game implements Serializable {
 
 	public void setY(Integer y) {
 		this.y = y;
+	}
+
+	public GameStatus getGameStatus() {
+		return gameStatus;
+	}
+
+	public void setGameStatus(GameStatus gameStatus) {
+		this.gameStatus = gameStatus;
 	}
 	
 }
