@@ -19,12 +19,12 @@ public class CheckBombLocker {
 	private final Logger log = LoggerFactory.getLogger(CheckBombLocker.class);
 	
 	@Condition
-	public boolean isBombLocker(@Fact("request") LockerRequest lockerRequest, @Fact("game") Game game) {
+	public boolean isARequestForExpose(@Fact("request") LockerRequest lockerRequest, @Fact("game") Game game) {
 		return lockerRequest.isExposed();
 	}
 	
 	@Action
-	public void showBlankNeighboringLockers(@Fact("request") LockerRequest lockerRequest, @Fact("game") Game game) throws Exception {
+	public void checkIfTheLockerToExposeHasABomb(@Fact("request") LockerRequest lockerRequest, @Fact("game") Game game) throws Exception {
 		int x = lockerRequest.getX();
 		int y = lockerRequest.getY();
 		Point point = new Point(x, y);
@@ -32,7 +32,7 @@ public class CheckBombLocker {
 			log.info("CheckBomb: {} - {}", l.getPoint().toString(), point.toString());
 			return l.getPoint().equals(point);
 		}).findAny().isPresent()) {
-			game.setGameStatus(GameStatus.LOST);
+			game.setStatus(GameStatus.LOST);
 			//TODO game.getLockers().get(y).set(x, element)
 			throw new Exception("Game over");
 		}

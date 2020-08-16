@@ -18,7 +18,7 @@ public class CheckBlankLocker {
 	
 	@Condition
 	public boolean isBlankLocker(@Fact("request") LockerRequest lockerRequest, @Fact("game") Game game) {
-		return false;
+		return !game.isLost() && false;
 	}
 	
 	@Action

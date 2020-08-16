@@ -46,7 +46,7 @@ public class Game implements Serializable {
     private List<Locker> minesLocations;
     
     @Field("status")
-    private GameStatus gameStatus;
+    private GameStatus status;
     
 
     public Game() {
@@ -64,7 +64,7 @@ public class Game implements Serializable {
         }
 		this.minesCount = DEFAULT_MINES_COUNT;
 		this.minesLocations = new ArrayList<Locker>(DEFAULT_MINES_COUNT);
-		this.gameStatus = GameStatus.IN_PLAY;
+		this.status = GameStatus.IN_PLAY;
 	}
     
     public Game(int rows, int columns, int mines) {
@@ -82,7 +82,7 @@ public class Game implements Serializable {
         }
 		this.minesCount = mines;
 		this.minesLocations = new ArrayList<Locker>(DEFAULT_MINES_COUNT);
-		this.gameStatus = GameStatus.IN_PLAY;
+		this.status = GameStatus.IN_PLAY;
 	}
 
 	public boolean isValidCell(int x, int y) {
@@ -180,12 +180,16 @@ public class Game implements Serializable {
 		this.y = y;
 	}
 
-	public GameStatus getGameStatus() {
-		return gameStatus;
+	public GameStatus getStatus() {
+		return status;
 	}
 
-	public void setGameStatus(GameStatus gameStatus) {
-		this.gameStatus = gameStatus;
+	public void setStatus(GameStatus gameStatus) {
+		this.status = gameStatus;
+	}
+	
+	public boolean isLost() {
+		return GameStatus.LOST.equals(this.status);
 	}
 	
 }

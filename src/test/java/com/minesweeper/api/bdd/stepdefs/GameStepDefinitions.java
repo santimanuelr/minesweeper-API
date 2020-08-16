@@ -2,10 +2,8 @@ package com.minesweeper.api.bdd.stepdefs;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.minesweeper.api.domain.BombLocker;
 import com.minesweeper.api.domain.Game;
 import com.minesweeper.api.domain.Locker;
 import com.minesweeper.api.domain.LockerRequest;
@@ -81,15 +78,7 @@ public class GameStepDefinitions {
 		int column = bombLocker.getPoint().x;
 		LockerRequest lockerRequest = new LockerRequest(row, column);
 		lockerRequest.setExposed(Boolean.TRUE);
-		try {
-			gameService.play(lockerRequest, this.game);
-		} catch (Exception e) {
-			// TODO: handle exception
-			log.info("The game is lost");
-		}
-		//assertThr(Exception.class, gameService.play(lockerRequest, this.game));
-		//assertThrows("Game Over", Exception.class, gameService.play(lockerRequest, this.game));
-		//assertThrows(Exception.class, gameService.play(lockerRequest, this.game), "Game Over");
+		gameService.play(lockerRequest, this.game);
     }
 	
 	@Then("^the board has a locker in row (\\d+) and column (\\d+) with (a|no a) question mark$")
@@ -116,7 +105,7 @@ public class GameStepDefinitions {
 	
 	@Then("^the game is over$")
 	public void theGameIsOverAndLost() throws Throwable {
-		assertEquals(GameStatus.LOST, this.game.getGameStatus());
+		assertEquals(GameStatus.LOST, this.game.getStatus());
     }
 	
 }

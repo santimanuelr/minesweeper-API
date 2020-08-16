@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import com.minesweeper.api.domain.Game;
 import com.minesweeper.api.domain.Locker;
 import com.minesweeper.api.domain.LockerRequest;
+import com.minesweeper.api.domain.enume.GameStatus;
 
 @Rule(name = "MarkFlagLocker", description = "Mark a flag in the given locker")
 public class MarkFlagLocker {
@@ -18,7 +19,8 @@ public class MarkFlagLocker {
 	
 	@Condition
 	public boolean canMarkQuestionLocker(@Fact("request") LockerRequest lockerReq, @Fact("game") Game game) {
-		return !game.getLockers().get(lockerReq.getY()).get(lockerReq.getX()).isExposed() && lockerReq.isFlag();
+		return !game.isLost() && !game.getLockers().get(lockerReq.getY()).get(lockerReq.getX()).isExposed() 
+				&& lockerReq.isFlag();
 	}
 	
 	@Action
