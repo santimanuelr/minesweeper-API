@@ -43,6 +43,7 @@ public class GameStepDefinitions {
 	
 	@Then("^the mines board has (\\d+) rows, (\\d+) columns and (\\d+) mines$")
 	public void theBoardHasParameterOf(int rows, int columns, int mines) throws Throwable {
+		//TODO
 		assertEquals(rows, this.game.getLockers().size(), "");
 		assertEquals(columns, this.game.getLockers().get(rows-1).size(), "");
 		assertEquals(mines, this.game.getMinesCount(), "");
@@ -64,13 +65,30 @@ public class GameStepDefinitions {
 		gameService.play(lockerRequest, this.game);
     }
 	
-	@And("^the user uncheck a locker with a bomb$")
-	public void theUserChecksABombLocker() throws Throwable {
+	@And("^the user exposes a locker with a bomb$")
+	public void theUserExposesABombLocker() throws Throwable {
 		Optional<List<Locker>> lockerList = game.getLockers().stream()
 				.filter(listRows -> listRows.stream().filter(l -> LockerType.BOMB.equals(l.getType())).findFirst().isPresent())
 				.findFirst();
 		Locker bombLocker = lockerList.get().stream()
 				.filter(l -> LockerType.BOMB.equals(l.getType()))
+				.findFirst()
+				.orElse(null);
+		assertNotNull(bombLocker);
+		int row = bombLocker.getPoint().y;
+		int column = bombLocker.getPoint().x;
+		LockerRequest lockerRequest = new LockerRequest(row, column);
+		lockerRequest.setExposed(Boolean.TRUE);
+		gameService.play(lockerRequest, this.game);
+    }
+	
+	@And("^the user exposes a blank locker$")
+	public void theUserExposesABlanckLocker() throws Throwable {
+		Optional<List<Locker>> lockerList = game.getLockers().stream()
+				.filter(listRows -> listRows.stream().filter(l -> LockerType.BLANK.equals(l.getType())).findFirst().isPresent())
+				.findFirst();
+		Locker bombLocker = lockerList.get().stream()
+				.filter(l -> LockerType.BLANK.equals(l.getType()))
 				.findFirst()
 				.orElse(null);
 		assertNotNull(bombLocker);
@@ -103,9 +121,21 @@ public class GameStepDefinitions {
 		}
     }
 	
+	@Then("^the board has a expose locker in row (\\d+) and column (\\d+)$")
+	public void theBoardHasAExposeLocker(int row, int column) throws Throwable {
+		assertFalse(this.game.getLockers().get(row).get(column).isFlag());
+		assertFalse(this.game.getLockers().get(row).get(column).isQuestion());
+		assertTrue(this.game.getLockers().get(row).get(column).isExposed());
+    }
+	
 	@Then("^the game is over$")
 	public void theGameIsOverAndLost() throws Throwable {
 		assertEquals(GameStatus.LOST, this.game.getStatus());
+    }
+	
+	@Then("^the game continues$")
+	public void theGameContinues() throws Throwable {
+		assertEquals(GameStatus.IN_PLAY, this.game.getStatus());
     }
 	
 }

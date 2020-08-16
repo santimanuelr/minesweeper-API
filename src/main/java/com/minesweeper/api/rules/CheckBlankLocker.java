@@ -18,7 +18,7 @@ public class CheckBlankLocker {
 	
 	@Condition
 	public boolean isBlankLocker(@Fact("request") LockerRequest lockerRequest, @Fact("game") Game game) {
-		return !game.isLost() && false;
+		return !game.isLost() && lockerRequest.isExposed();
 	}
 	
 	@Action
@@ -33,7 +33,6 @@ public class CheckBlankLocker {
 		          if (!LockerType.BOMB.equals(game.getLockers().get(j).get(i).getType()) 
 		        		  && !game.getLockers().get(j).get(i).isExposed()) {
 		        	game.getLockers().get(j).get(i).setExposed(Boolean.TRUE);
-		            //response.add(new CellStatusResponse(i, j, this.cells[i][j]));
 		            if (LockerType.BLANK.equals(game.getLockers().get(j).get(i).getType())) {
 		            	showBlankNeighboringLockers(new LockerRequest(LockerType.BLANK, i, j), game);
 		            }

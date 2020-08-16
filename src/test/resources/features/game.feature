@@ -16,7 +16,12 @@ Feature: Game Minesweeper logic
 	    Then the board has a locker in row 7 and column 6 with a flag mark
 	    And the board has a locker in row 7 and column 6 with no a question mark
 	    
-	Scenario: User creates a new default game and mark a locker with a flag
+	Scenario: User creates a new default game and exposes a locker with a bomb - Game Over
 	    When the user starts new default game
-	    And the user uncheck a locker with a bomb
+	    And the user exposes a locker with a bomb
 	    Then the game is over
+	    
+	Scenario: User creates a new default game and exposes a blank locker - Game continue
+	    When the user starts new default game
+	    And the user exposes a blank locker 
+	    Then the game continues
