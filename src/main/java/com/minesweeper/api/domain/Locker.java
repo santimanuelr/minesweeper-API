@@ -25,7 +25,18 @@ public class Locker implements Serializable {
     @Field("point")
     private Point point;
 
-    private boolean revealed = false;
+    private boolean exposed;
+    
+    private boolean question;
+    
+    private boolean flag;
+    
+    
+    public Locker() {
+    	this.exposed = false;
+    	this.question = false;
+    	this.flag = false;
+	}
     
     
     public Point getPoint() {
@@ -84,11 +95,28 @@ public class Locker implements Serializable {
             "}";
     }
 
-	public boolean isRevealed() {
-		return revealed;
+	public boolean isExposed() {
+		return exposed;
 	}
 
-	public void setRevealed(boolean revealed) {
-		this.revealed = revealed;
+	public void setExposed(boolean exposed) {
+		this.exposed = exposed;
 	}
+	
+	public boolean isQuestion() {
+		return question;
+	}
+
+	public void setQuestion(boolean question) {
+		this.question = question;
+	}
+
+	public boolean isFlag() {
+		return flag;
+	}
+
+	public void setFlag(boolean flag) {
+		this.flag = flag;
+	}
+	
 }

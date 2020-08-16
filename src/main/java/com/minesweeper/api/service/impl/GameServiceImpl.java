@@ -1,6 +1,5 @@
 package com.minesweeper.api.service.impl;
 
-import java.awt.Point;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,10 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.minesweeper.api.domain.Game;
+import com.minesweeper.api.domain.LockerRequest;
 import com.minesweeper.api.repository.GameRepository;
 import com.minesweeper.api.rules.AddMines;
 import com.minesweeper.api.rules.CheckBlankLocker;
+import com.minesweeper.api.rules.MarkFlagLocker;
+import com.minesweeper.api.rules.MarkQuestionLocker;
 import com.minesweeper.api.rules.PlaceNumbers;
+import com.minesweeper.api.rules.UncheckLocker;
 import com.minesweeper.api.service.GameService;
 
 @Service
@@ -52,12 +55,13 @@ public class GameServiceImpl implements GameService {
 	}
 
 	@Override
-	public Game play(Point point, Game game) {
+	public Game play(LockerRequest lr, Game game) {
 		// TODO Auto-generated method stub
+		log.info("Start play with request x: {} - y: {}", lr.getX(), lr.getY());
 		RulesEngine rulesEngine = new DefaultRulesEngine();
 		Facts fact = new Facts();
 		fact.put("game", game);
-		fact.put("point", point);
+		fact.put("request", lr);
 		rulesEngine.fire(getPlayRules(), fact);
 		return game;
 	}
@@ -65,6 +69,9 @@ public class GameServiceImpl implements GameService {
 	private Rules getPlayRules() {
 		Rules rules = new Rules();
 		rules.register(new CheckBlankLocker());
+		rules.register(new UncheckLocker());
+		rules.register(new MarkQuestionLocker());
+		rules.register(new MarkFlagLocker());
 		return rules;
 	}
 

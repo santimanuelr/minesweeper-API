@@ -15,18 +15,18 @@ import com.minesweeper.api.domain.Locker;
 import com.minesweeper.api.domain.LockerRequest;
 import com.minesweeper.api.domain.enume.LockerType;
 
-@Rule(name = "AddMines", description = "Check if a given Point has a blank locker an shows all their neighboring lockers")
+@Rule(name = "AddMines", description = "Add mines to the board in random points", priority = 1)
 public class AddMines {
 
 	private final Logger log = LoggerFactory.getLogger(AddMines.class);
-	
+
 	@Condition
 	public boolean notHasMinesSet(@Fact("game") Game game) {
 		return true;
 	}
 	
 	@Action
-	public void showBlankNeighboringLockers(@Fact("request") LockerRequest lockerRequest, @Fact("game") Game game) {
+	public void showBlankNeighboringLockers(@Fact("game") Game game) {
 		Random random = new Random();
 	    int mines = game.getMinesCount();
 	    

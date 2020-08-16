@@ -20,20 +20,21 @@ public class CheckBlankLocker {
 	
 	@Condition
 	public boolean isBlankLocker(@Fact("request") LockerRequest lockerRequest, @Fact("game") Game game) {
-		return true;
+		return false;
 	}
 	
 	@Action
 	public void showBlankNeighboringLockers(@Fact("request") LockerRequest lockerRequest, @Fact("game") Game game) {
-		Point point = lockerRequest.getPoint();
+		int x = lockerRequest.getX();
+		int y = lockerRequest.getY();
 		for (int yOffset = -1; yOffset < 2; yOffset++) {
 			for (int xOffset = -1; xOffset < 2; xOffset++) {
-				int j = point.y + yOffset;
-				int i = point.x + xOffset;
+				int j = y + yOffset;
+				int i = x + xOffset;
 		        if (game.isValidCell(i, j)) {
 		          if (!LockerType.BOMB.equals(game.getLockers().get(j).get(i).getType()) 
-		        		  && !game.getLockers().get(j).get(i).isRevealed()) {
-		        	game.getLockers().get(j).get(i).setRevealed(Boolean.TRUE);
+		        		  && !game.getLockers().get(j).get(i).isExposed()) {
+		        	game.getLockers().get(j).get(i).setExposed(Boolean.TRUE);
 		            //response.add(new CellStatusResponse(i, j, this.cells[i][j]));
 		            if (LockerType.BLANK.equals(game.getLockers().get(j).get(i).getType())) {
 		            	showBlankNeighboringLockers(new LockerRequest(LockerType.BLANK, i, j), game);

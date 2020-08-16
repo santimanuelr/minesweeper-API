@@ -1,10 +1,10 @@
 package com.minesweeper.api.service;
 
-import java.awt.Point;
 import java.util.List;
 import java.util.Optional;
 
 import com.minesweeper.api.domain.Game;
+import com.minesweeper.api.domain.LockerRequest;
 
 public interface GameService {
 
@@ -18,8 +18,6 @@ public interface GameService {
 
 	Optional<Game> findById(String id);
 	
-	Game play(Point point, Game game);
-
-    //private final Logger log = LoggerFactory.getLogger(GameService.class);
+	Game play(LockerRequest lr, Game game);
 
 }
