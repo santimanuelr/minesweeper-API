@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.minesweeper.api.domain.Game;
+import com.minesweeper.api.domain.GameRequest;
 import com.minesweeper.api.service.GameService;
 
 /**
@@ -49,11 +50,8 @@ public class GameResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/games")
-    public ResponseEntity<Game> createGame(@RequestBody Game game) throws URISyntaxException {
+    public ResponseEntity<Game> createGame(@RequestBody GameRequest game) throws URISyntaxException {
         log.debug("REST request to save Game : {}", game);
-        if (game.getId() != null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "A new game cannot already have an ID");
-        }
         Game result = gameService.save(game);
         return ResponseEntity.created(new URI("/api/games/" + result.getId()))
             .body(result);
@@ -69,7 +67,7 @@ public class GameResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/games")
-    public ResponseEntity<Game> updateGame(@RequestBody Game game) throws URISyntaxException {
+    public ResponseEntity<Game> updateGame(@RequestBody GameRequest game) throws URISyntaxException {
         log.debug("REST request to update Game : {}", game);
         if (game.getId() == null) {
         	throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid id");

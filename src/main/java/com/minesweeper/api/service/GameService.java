@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import com.minesweeper.api.domain.Game;
+import com.minesweeper.api.domain.GameRequest;
 import com.minesweeper.api.domain.LockerRequest;
 
 public interface GameService {
 
-	Game save(Game newGame);
+	Game save(GameRequest game);
 	
 	Game createNewDefaultGame();
 
