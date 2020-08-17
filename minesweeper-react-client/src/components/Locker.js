@@ -1,6 +1,6 @@
 import React from "react";
 
-const Locker = ({ locker }) => {
+const Locker = ({ locker, onClickLocker }) => {
 
     const tdStyle = {
         height: "30px",
@@ -20,7 +20,7 @@ const Locker = ({ locker }) => {
     return (
         <td style={tdStyle}>
             {locker && locker.type}
-            <button style={square}></button>
+            <button style={square} onClick={() => onClickLocker()}></button>
         </td>
     );
 }

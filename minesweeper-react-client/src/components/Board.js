@@ -1,10 +1,7 @@
 import React from "react";
 import Locker from "./Locker";
 
-const Board = ({ lockers }) => {
-
-    let matrix = Array(9).fill().map(()=>Array(9).fill());
-
+const Board = ({ lockers, onClickLocker }) => {
     return (
         <div>
             <center>
@@ -14,7 +11,7 @@ const Board = ({ lockers }) => {
                     <tr>
                         {row.map(
                             locker => (
-                                <Locker locker={locker}></Locker>
+                                <Locker locker={locker} onClickLocker={onClickLocker}></Locker>
                             )
                         )}
                     </tr>

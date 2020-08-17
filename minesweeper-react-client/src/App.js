@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Board from './components/Board';
 
@@ -13,7 +12,6 @@ class App extends Component {
   };
 
   componentDidMount() {
-
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -36,24 +34,36 @@ class App extends Component {
       .catch(console.log);
   }
 
+  fetchPutLocker() {
+    const requestOptionsPut = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        x:3,
+        y:3,
+        exposed:true,
+        question:false,
+        flag:false,
+        uncheck:false
+      })
+    };
+
+    fetch("http://localhost:8080/api/games", requestOptionsPut)
+    .then(res => res.json())
+    .then(data => {
+      this.setState({ lockers: data.lockers, 
+        x: data.x, 
+        y: data.y, 
+        name: data.name 
+      });
+    })
+    .catch(console.log);
+  }
+
   render() {
     return (
       <div className="App">
-        {/* <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer" 
-          >
-            Learn React
-          </a>
-        </header> */}
-        <Board lockers={this.state.lockers}></Board>
+        <Board lockers={this.state.lockers} onClickLocker = {this.fetchPutLocker}></Board>
       </div>
     );
   }
