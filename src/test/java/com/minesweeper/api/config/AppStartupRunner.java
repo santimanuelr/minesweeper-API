@@ -8,6 +8,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import com.minesweeper.api.domain.Game;
+import com.minesweeper.api.domain.GameRequest;
 import com.minesweeper.api.service.GameService;
 
 @Component
@@ -22,7 +23,7 @@ public class AppStartupRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
     	//Insert one first game for testing purpose
-        Game newGame = new Game();
+        GameRequest newGame = new GameRequest();
         gameService.save(newGame);
         LOG.info("Insert Game succesfully: {}", newGame.getName());
     }

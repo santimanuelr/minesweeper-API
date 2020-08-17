@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.minesweeper.api.domain.Game;
+import com.minesweeper.api.domain.GameRequest;
 import com.minesweeper.api.domain.LockerRequest;
 import com.minesweeper.api.repository.GameRepository;
 import com.minesweeper.api.rules.AddMines;
@@ -33,8 +34,14 @@ public class GameServiceImpl implements GameService {
     private GameRepository gameRepository;
 
 	@Override
-	public Game save(Game newGame) {
-		return gameRepository.save(newGame);
+	public Game save(GameRequest newGame) {
+		Game game;
+		if (newGame.getX() == null || newGame.getY() == null) {
+			game = createNewDefaultGame();
+		} else {
+			game = new Game(newGame.getY(), newGame.getX(), 3);
+		}
+		return gameRepository.save(game);
 	}
 
 	@Override
