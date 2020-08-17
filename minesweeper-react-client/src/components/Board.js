@@ -1,7 +1,7 @@
 import React from "react";
 import Locker from "./Locker";
 
-const Board = ({ }) => {
+const Board = ({ lockers }) => {
 
     let matrix = Array(9).fill().map(()=>Array(9).fill());
 
@@ -9,15 +9,17 @@ const Board = ({ }) => {
         <div>
             <center>
                 <h1>Mine Sweeper</h1>
-                {matrix.map(row => (
-                    <div>
+                <table id = "board">
+                {lockers.map(row => (
+                    <tr>
                         {row.map(
                             locker => (
-                                <Locker></Locker>
+                                <Locker locker={locker}></Locker>
                             )
                         )}
-                    </div>
+                    </tr>
                 ))}
+                </table>
             </center>
         </div>  
     );

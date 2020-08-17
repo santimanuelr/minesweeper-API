@@ -1,4 +1,4 @@
-package com.minesweeper.api.web.rest;
+package com.minesweeper.api.web;
 
 import java.net.URI;
 import java.net.URISyntaxException;

@@ -16,7 +16,7 @@ import com.minesweeper.api.domain.enume.GameStatus;
 @Document(collection = "game")
 public class Game implements Serializable {
 
-    private static final String DEFAULT_NAME = "DEFAULT NAME";
+    private static final String DEFAULT_NAME = "DEFAULT NAME ";
 	private static final Integer DEFAULT_LEGTH_X = 9;
     private static final Integer DEFAULT_LEGTH_Y = 9;
     private static final Integer DEFAULT_MINES_COUNT = 3;
