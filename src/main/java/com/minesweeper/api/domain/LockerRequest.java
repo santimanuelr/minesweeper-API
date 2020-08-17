@@ -4,6 +4,8 @@ import com.minesweeper.api.domain.enume.LockerType;
 
 public class LockerRequest {
 	
+    private String idGame;
+	
 	private LockerType lockerType;
 	private Integer x;
 	private Integer y;
@@ -16,7 +18,12 @@ public class LockerRequest {
     
     private boolean uncheck = false;
     
+    
     	
+	public LockerRequest() {
+		super();
+	}
+
 	public LockerRequest(Integer y, Integer x) {
 		super();
 		this.x = x;
@@ -82,6 +89,14 @@ public class LockerRequest {
 
 	public void setUncheck(boolean uncheck) {
 		this.uncheck = uncheck;
+	}
+
+	public String getIdGame() {
+		return idGame;
+	}
+
+	public void setIdGame(String idGame) {
+		this.idGame = idGame;
 	}
 
 }

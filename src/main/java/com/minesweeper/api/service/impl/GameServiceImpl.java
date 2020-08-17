@@ -66,11 +66,23 @@ public class GameServiceImpl implements GameService {
 	public Game play(LockerRequest lr, Game game) throws Exception {
 		// TODO Auto-generated method stub
 		log.info("Start play with request x: {} - y: {}", lr.getX(), lr.getY());
+		
+		
+		if (game == null) {
+			Optional<Game> gameOptional = gameRepository.findById(lr.getIdGame());
+			if (gameOptional.isEmpty()) {
+				throw new Exception();
+			} else {
+				game = gameOptional.get();
+			}
+		}
+		
 		RulesEngine rulesEngine = new DefaultRulesEngine();
 		Facts fact = new Facts();
 		fact.put("game", game);
 		fact.put("request", lr);
 		rulesEngine.fire(getPlayRules(), fact);
+		gameRepository.save(game);
 		return game;
 	}
 

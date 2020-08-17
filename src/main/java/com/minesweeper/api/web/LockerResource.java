@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.minesweeper.api.domain.Game;
 import com.minesweeper.api.domain.Locker;
+import com.minesweeper.api.domain.LockerRequest;
 import com.minesweeper.api.repository.LockerRepository;
+import com.minesweeper.api.service.GameService;
 
 /**
  * REST controller for managing {@link com.minesweeper.api.domain.Locker}.
@@ -36,6 +40,9 @@ public class LockerResource {
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
+    
+    @Autowired
+    private GameService gameService;
 
     private final LockerRepository lockerRepository;
 
@@ -68,15 +75,15 @@ public class LockerResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated locker,
      * or with status {@code 400 (Bad Request)} if the locker is not valid,
      * or with status {@code 500 (Internal Server Error)} if the locker couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     * @throws Exception 
      */
     @PutMapping("/lockers")
-    public ResponseEntity<Locker> updateLocker(@RequestBody Locker locker) throws URISyntaxException {
+    public ResponseEntity<Game> updateLocker(@RequestBody LockerRequest locker) throws Exception {
         log.debug("REST request to update Locker : {}", locker);
-        if (locker.getId() == null) {
+        if (locker.getIdGame() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid id");
         }
-        Locker result = lockerRepository.save(locker);
+        Game result = gameService.play(locker, null);
         return ResponseEntity.ok()
             .body(result);
     }

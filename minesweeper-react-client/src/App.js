@@ -25,22 +25,19 @@ class App extends Component {
     fetch("http://localhost:8080/api/games", requestOptions)
       .then(res => res.json())
       .then(data => {
-        this.setState({ lockers: data.lockers, 
-          x: data.x, 
-          y: data.y, 
-          name: data.name 
-        });
+        this.setState(data);
       })
       .catch(console.log);
   }
 
-  fetchPutLocker() {
+  fetchPutLocker = (idGame, x, y) => {
     const requestOptionsPut = {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        x:3,
-        y:3,
+        idGame: idGame,
+        x:x,
+        y:y,
         exposed:true,
         question:false,
         flag:false,
@@ -48,14 +45,10 @@ class App extends Component {
       })
     };
 
-    fetch("http://localhost:8080/api/games", requestOptionsPut)
+    fetch("http://localhost:8080/api/lockers", requestOptionsPut)
     .then(res => res.json())
     .then(data => {
-      this.setState({ lockers: data.lockers, 
-        x: data.x, 
-        y: data.y, 
-        name: data.name 
-      });
+      this.setState(data);
     })
     .catch(console.log);
   }
@@ -63,7 +56,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Board lockers={this.state.lockers} onClickLocker = {this.fetchPutLocker}></Board>
+        <Board game={this.state} onClickLocker = {this.fetchPutLocker}></Board>
       </div>
     );
   }

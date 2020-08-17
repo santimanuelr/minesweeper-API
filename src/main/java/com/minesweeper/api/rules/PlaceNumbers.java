@@ -36,8 +36,8 @@ private final Logger log = LoggerFactory.getLogger(AddMines.class);
 		        int counter = 0;
 		        for (int xOffset = -1; xOffset < 2; xOffset++) {
 		          for (int yOffset = -1; yOffset < 2; yOffset++) {
-		            int tmpX = i + xOffset;
-		            int tmpY = j + yOffset;
+		            int tmpX = j + xOffset;
+		            int tmpY = i + yOffset;
 		            if (game.isValidCell(tmpX, tmpY) && LockerType.BOMB.equals(game.getLockers().get(tmpY).get(tmpX).getType())) {
 		              counter++;
 		            }
