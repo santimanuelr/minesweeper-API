@@ -3,10 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter, Route } from 'react-router-dom'
+import Games from './games/Games';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Route exact path="/" component={App} />
+      <Route exact path="/games" component={Games} />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Locker = ({ idGame, locker, onClickLocker }) => {
+const Locker = ({ idGame, locker, onClickLocker, onClickFlag }) => {
 
     const tdStyle = {
         height: "30px",
@@ -25,10 +25,13 @@ const Locker = ({ idGame, locker, onClickLocker }) => {
     return (
         <td style={tdStyle}>
             {locker && locker.type}
-            {locker && !locker.exposed && 
+            {locker && !locker.exposed && <>
                 <button style={square} 
                 onClick={() => onClickLocker(idGame, locker.point.x, locker.point.y)}>
-                </button>}
+                </button>
+                <button style={square} 
+                onClick={() => onClickFlag(idGame, locker.point.x, locker.point.y)}>
+            </button></>}
             {locker && locker.exposed && locker.type === 'NUMBER' 
             && <h3 style = {numberStyle}>{locker.number}</h3>}
         </td>

@@ -30,6 +30,28 @@ class App extends Component {
       .catch(console.log);
   }
 
+  fetchPutLockerFlag = (idGame, x, y) => {
+    const requestOptionsPut = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        idGame: idGame,
+        x:x,
+        y:y,
+        exposed:false,
+        question:false,
+        flag:true,
+        uncheck:false
+      })
+    };
+    fetch("http://localhost:8080/api/lockers", requestOptionsPut)
+    .then(res => res.json())
+    .then(data => {
+      this.setState(data);
+    })
+    .catch(console.log);
+  }
+
   fetchPutLocker = (idGame, x, y) => {
     const requestOptionsPut = {
       method: 'PUT',
@@ -56,7 +78,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Board game={this.state} onClickLocker = {this.fetchPutLocker}></Board>
+        <Board game={this.state} onClickLocker = {this.fetchPutLocker} onClickFlag = {this.fetchPutLockerFlag}></Board>
       </div>
     );
   }

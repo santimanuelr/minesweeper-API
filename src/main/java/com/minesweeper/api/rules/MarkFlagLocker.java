@@ -1,5 +1,7 @@
 package com.minesweeper.api.rules;
 
+import java.awt.Point;
+
 import org.jeasy.rules.annotation.Action;
 import org.jeasy.rules.annotation.Condition;
 import org.jeasy.rules.annotation.Fact;
@@ -28,7 +30,17 @@ public class MarkFlagLocker {
 		Locker locker = game.getLockers().get(lockerReq.getY()).get(lockerReq.getX());
 		locker.setFlag(Boolean.TRUE);
 		locker.setQuestion(Boolean.FALSE);
+		int x = lockerReq.getX();
+		int y = lockerReq.getY();
+		Point point = new Point(x, y);
+		game.getMinesLocations().stream()
+				.filter(l -> l.getPoint().equals(point))
+				.findFirst()
+				.ifPresent(l -> l.setFlag(Boolean.TRUE));
 		game.getLockers().get(lockerReq.getY()).set(lockerReq.getX(), locker);
+		if (!game.getMinesLocations().stream().filter(l -> !l.isFlag()).findAny().isPresent()) {
+			game.setStatus(GameStatus.WON);
+		}
 	}
 
 }

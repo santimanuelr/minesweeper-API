@@ -1,7 +1,7 @@
 import React from "react";
 import Locker from "./Locker";
 
-const Board = ({ game, onClickLocker }) => {
+const Board = ({ game, onClickLocker, onClickFlag }) => {
     return (
         <div>
             <center>
@@ -12,7 +12,7 @@ const Board = ({ game, onClickLocker }) => {
                         <tr>
                             {row.map(
                                 locker => (
-                                    <Locker idGame = {game.id} locker={locker} onClickLocker={onClickLocker}></Locker>
+                                    <Locker idGame = {game.id} locker={locker} onClickLocker={onClickLocker} onClickFlag={onClickFlag}></Locker>
                                 )
                             )}
                         </tr>
@@ -20,6 +20,7 @@ const Board = ({ game, onClickLocker }) => {
                     </table>
                 }
                 {game.status === "LOST" && <h2>Game Over</h2>}
+                {game.status === "WON" && <h2>You WIN!</h2>}
             </center>
         </div>  
     );
