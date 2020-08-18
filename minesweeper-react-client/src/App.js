@@ -31,7 +31,7 @@ class App extends Component {
       .catch(console.log);
   }
 
-  fetchPutLockerFlag = (idGame, x, y, flag, question) => {
+  fetchPutLockerFlag = (idGame, x, y, flag, question, uncheck) => {
     const requestOptionsPut = {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -42,7 +42,7 @@ class App extends Component {
         exposed:false,
         question:question,
         flag:flag,
-        uncheck:false
+        uncheck:uncheck
       })
     };
     fetch(API_URL_LOCKERS, requestOptionsPut)

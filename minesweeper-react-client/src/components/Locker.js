@@ -35,14 +35,32 @@ const Locker = ({ idGame, locker, onClickLocker, onClickFlag }) => {
                 <button style={square} 
                     onClick={() => onClickLocker(idGame, locker.point.x, locker.point.y)}>
                 </button>
-                <button style={square}
-                    onClick={() => onClickFlag(idGame, locker.point.x, locker.point.y, true, false)}>
-                    <span role="img" aria-label="flag">⛳️</span>
-                </button>
-                <button style={square} 
-                    onClick={() => onClickFlag(idGame, locker.point.x, locker.point.y, false, true)}>
-                    <span role="img" aria-label="question">❓</span>
-                </button>
+
+                {locker && !locker.exposed && locker.flag && 
+                    <button style={square}
+                        onClick={() => onClickFlag(idGame, locker.point.x, locker.point.y, false, false, true)}>
+                        <span role="img" aria-label="flag">⛳️</span>
+                    </button>
+                }
+                {locker && !locker.exposed && !locker.flag && 
+                    <button style={square}
+                        onClick={() => onClickFlag(idGame, locker.point.x, locker.point.y, true, false, false)}>
+                        <span role="img" aria-label="flag">⛳️</span>
+                    </button>
+                }
+
+                {locker && !locker.exposed && locker.question &&
+                    <button style={square} 
+                        onClick={() => onClickFlag(idGame, locker.point.x, locker.point.y, false, false, true)}>
+                        <span role="img" aria-label="question">❓</span>
+                    </button>
+                }
+                {locker && !locker.exposed && !locker.question &&
+                    <button style={square} 
+                        onClick={() => onClickFlag(idGame, locker.point.x, locker.point.y, false, true, false)}>
+                        <span role="img" aria-label="question">❓</span>
+                    </button>
+                }
             </>}
             {locker && locker.exposed && locker.type === 'NUMBER' 
             && <h2 style = {numberStyle}>{locker.number}</h2>}
