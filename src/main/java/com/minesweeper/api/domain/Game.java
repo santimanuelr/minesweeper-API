@@ -19,10 +19,9 @@ public class Game implements Serializable {
     private static final String DEFAULT_NAME = "DEFAULT NAME ";
 	private static final Integer DEFAULT_LEGTH_X = 9;
     private static final Integer DEFAULT_LEGTH_Y = 9;
-    private static final Integer DEFAULT_MINES_COUNT = 3;
+    private static final Integer DEFAULT_MINES_COUNT = 6;
 
 	private static final long serialVersionUID = 1L;
-	
 	
     @Id
     private String id;
