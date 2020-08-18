@@ -43,7 +43,6 @@ public class GameStepDefinitions {
 	
 	@Then("^the mines board has (\\d+) rows, (\\d+) columns and (\\d+) mines$")
 	public void theBoardHasParameterOf(int rows, int columns, int mines) throws Throwable {
-		//TODO
 		assertEquals(rows, this.game.getLockers().size(), "");
 		assertEquals(columns, this.game.getLockers().get(rows-1).size(), "");
 		assertEquals(mines, this.game.getMinesCount(), "");

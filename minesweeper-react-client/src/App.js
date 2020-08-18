@@ -30,7 +30,7 @@ class App extends Component {
       .catch(console.log);
   }
 
-  fetchPutLockerFlag = (idGame, x, y) => {
+  fetchPutLockerFlag = (idGame, x, y, flag, question) => {
     const requestOptionsPut = {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -39,8 +39,8 @@ class App extends Component {
         x:x,
         y:y,
         exposed:false,
-        question:false,
-        flag:true,
+        question:question,
+        flag:flag,
         uncheck:false
       })
     };

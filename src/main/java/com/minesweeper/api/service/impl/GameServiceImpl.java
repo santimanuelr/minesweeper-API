@@ -46,27 +46,22 @@ public class GameServiceImpl implements GameService {
 
 	@Override
 	public void deleteById(String id) {
-		// TODO Auto-generated method stub
-		
+		gameRepository.deleteById(id);		
 	}
 
 	@Override
 	public List<Game> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return gameRepository.findAll();
 	}
 
 	@Override
 	public Optional<Game> findById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return gameRepository.findById(id);
 	}
 
 	@Override
 	public Game play(LockerRequest lr, Game game) throws Exception {
-		// TODO Auto-generated method stub
 		log.info("Start play with request x: {} - y: {}", lr.getX(), lr.getY());
-		
 		
 		if (game == null) {
 			Optional<Game> gameOptional = gameRepository.findById(lr.getIdGame());

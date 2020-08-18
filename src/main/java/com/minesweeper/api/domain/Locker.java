@@ -3,26 +3,19 @@ package com.minesweeper.api.domain;
 import java.awt.Point;
 import java.io.Serializable;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Field;
-
 import com.minesweeper.api.domain.enume.LockerType;
 
 /**
  * A Locker.
  */
-//@Document(collection = "locker")
 public class Locker implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
     private String id;
 
-    @Field("type")
     protected LockerType type;
     
-    @Field("point")
     private Point point;
 
     private boolean exposed;

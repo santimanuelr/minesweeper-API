@@ -33,7 +33,6 @@ public class CheckBombLocker {
 			return l.getPoint().equals(point);
 		}).findAny().isPresent()) {
 			game.setStatus(GameStatus.LOST);
-			//TODO game.getLockers().get(y).set(x, element)
 			throw new Exception("Game over");
 		}
 	}

@@ -12,12 +12,10 @@ public class BombLocker extends Locker {
 	private static final long serialVersionUID = 1L;
 	
 	public BombLocker() {
-		// TODO Auto-generated constructor stub
 		this.type = LockerType.BOMB;
 	}
 
 	public BombLocker(Point point) {
-		// TODO Auto-generated constructor stub
 		super(point);
 		this.type = LockerType.BOMB;
 	}
