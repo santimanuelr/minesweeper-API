@@ -7,7 +7,8 @@ For the client api I used ReactJS
 
 ## Urls to test this project
 
-[https://inspiring-kare-64b0c0.netlify.app/](https://inspiring-kare-64b0c0.netlify.app/)
+[https://inspiring-kare-64b0c0.netlify.app/](https://inspiring-kare-64b0c0.netlify.app/) 
+
 And the java project was upload to Heroku -> [https://minesweeper-java-api.herokuapp.com/api/games](https://minesweeper-java-api.herokuapp.com/api/games)
 
 
