@@ -22,7 +22,7 @@ class App extends Component {
       })
     };
 
-    fetch("http://localhost:8080/api/games", requestOptions)
+    fetch("https://minesweeper-java-api.herokuapp.com/api/games", requestOptions)
       .then(res => res.json())
       .then(data => {
         this.setState(data);
@@ -44,7 +44,7 @@ class App extends Component {
         uncheck:false
       })
     };
-    fetch("http://localhost:8080/api/lockers", requestOptionsPut)
+    fetch("https://minesweeper-java-api.herokuapp.com/api/lockers", requestOptionsPut)
     .then(res => res.json())
     .then(data => {
       this.setState(data);
@@ -67,7 +67,7 @@ class App extends Component {
       })
     };
 
-    fetch("http://localhost:8080/api/lockers", requestOptionsPut)
+    fetch("https://minesweeper-java-api.herokuapp.com/api/lockers", requestOptionsPut)
     .then(res => res.json())
     .then(data => {
       this.setState(data);
