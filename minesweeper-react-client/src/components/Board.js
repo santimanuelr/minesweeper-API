@@ -4,7 +4,7 @@ import Locker from "./Locker";
 const Board = ({ game, onClickLocker, onClickFlag }) => {
     return (
         <div>
-            <center>
+            <center style={{"backgroundColor":"paleturquoise"}}>
                 <h1>Mine Sweeper</h1>
                 {game.status === "IN_PLAY" &&
                     <table id = "board">
