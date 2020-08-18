@@ -79,8 +79,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Board game={this.state} onClickLocker = {this.fetchPutLocker} onClickFlag = {this.fetchPutLockerFlag}></Board>
         <a href="/games">Custom Game</a>
+        <Board game={this.state} onClickLocker = {this.fetchPutLocker} onClickFlag = {this.fetchPutLockerFlag}></Board>
       </div>
     );
   }
