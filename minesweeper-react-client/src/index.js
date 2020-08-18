@@ -4,13 +4,13 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route } from 'react-router-dom'
-import Games from './games/Games';
+import CustomGame from './games/CustomGame';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Route exact path="/" component={App} />
-      <Route exact path="/games" component={Games} />
+      <Route exact path="/games" component={CustomGame} />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

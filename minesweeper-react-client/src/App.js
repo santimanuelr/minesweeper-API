@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Board from './components/Board';
+import { API_URL_LOCKERS, API_URL } from './api'
 
 class App extends Component {
 
@@ -22,7 +23,7 @@ class App extends Component {
       })
     };
 
-    fetch("https://minesweeper-java-api.herokuapp.com/api/games", requestOptions)
+    fetch(API_URL, requestOptions)
       .then(res => res.json())
       .then(data => {
         this.setState(data);
@@ -44,7 +45,7 @@ class App extends Component {
         uncheck:false
       })
     };
-    fetch("https://minesweeper-java-api.herokuapp.com/api/lockers", requestOptionsPut)
+    fetch(API_URL_LOCKERS, requestOptionsPut)
     .then(res => res.json())
     .then(data => {
       this.setState(data);
@@ -67,7 +68,7 @@ class App extends Component {
       })
     };
 
-    fetch("https://minesweeper-java-api.herokuapp.com/api/lockers", requestOptionsPut)
+    fetch(API_URL_LOCKERS, requestOptionsPut)
     .then(res => res.json())
     .then(data => {
       this.setState(data);
@@ -79,6 +80,7 @@ class App extends Component {
     return (
       <div className="App">
         <Board game={this.state} onClickLocker = {this.fetchPutLocker} onClickFlag = {this.fetchPutLockerFlag}></Board>
+        <a href="/games">Custom Game</a>
       </div>
     );
   }

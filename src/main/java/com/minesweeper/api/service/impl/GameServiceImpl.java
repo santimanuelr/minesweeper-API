@@ -39,9 +39,17 @@ public class GameServiceImpl implements GameService {
 		if (newGame.getX() == null || newGame.getY() == null) {
 			game = createNewDefaultGame();
 		} else {
-			game = new Game(newGame.getY(), newGame.getX(), 3);
+			game = createCustomGame(new Game(newGame.getY(), newGame.getX(), newGame.getMinesCount(), newGame.getName()));
 		}
 		return gameRepository.save(game);
+	}
+
+	private Game createCustomGame(Game game) {
+		RulesEngine rulesEngine = new DefaultRulesEngine();
+		Facts fact = new Facts();
+		fact.put("game", game);
+		rulesEngine.fire(getCreateGameRules(), fact);
+		return game;
 	}
 
 	@Override

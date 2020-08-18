@@ -1,9 +1,15 @@
 # minesweeper-API
-API test
 
-We ask that you complete the following challenge to evaluate your development skills. Please use the programming language and framework discussed during your interview to accomplish the following task.
+## What I used
 
-PLEASE DO NOT FORK THE REPOSITORY. WE NEED A PUBLIC REPOSITORY FOR THE REVIEW. 
+I used rules engine from [https://www.jeasy.org/](https://www.jeasy.org/) and Cucumber for testing [https://cucumber.io/](https://cucumber.io/)
+For the client api I used ReactJS
+
+## Urls to test this project
+
+[https://inspiring-kare-64b0c0.netlify.app/](https://inspiring-kare-64b0c0.netlify.app/)
+And the java project was upload to Heroku -> [https://minesweeper-java-api.herokuapp.com/api/games](https://minesweeper-java-api.herokuapp.com/api/games)
+
 
 ## The Game
 Develop the classic game of [Minesweeper](https://en.wikipedia.org/wiki/Minesweeper_(video_game))
