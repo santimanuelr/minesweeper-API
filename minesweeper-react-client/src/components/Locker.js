@@ -31,19 +31,19 @@ const Locker = ({ idGame, locker, onClickLocker, onClickFlag }) => {
                 </button>
                 <button style={square} 
                 onClick={() => onClickFlag(idGame, locker.point.x, locker.point.y, true, false)}>
-                    <span role="img">⛳️</span>
+                    <span role="img" aria-label="flag">⛳️</span>
                 </button>
                 <button style={square} 
                 onClick={() => onClickFlag(idGame, locker.point.x, locker.point.y, false, true)}>
-                    <span role="img">❓</span>
+                    <span role="img" aria-label="question">❓</span>
                 </button>
             </>}
             {locker && locker.exposed && locker.type === 'NUMBER' 
             && <h3 style = {numberStyle}>{locker.number}</h3>}
             {locker && !locker.exposed && locker.flag 
-            && <h3 style = {numberStyle}><span role="img">⛳️</span></h3>}
+            && <h3 style = {numberStyle}><span role="img" aria-label="flag">⛳️</span></h3>}
             {locker && !locker.exposed && locker.question 
-            && <h3 style = {numberStyle}><span role="img">❓</span></h3>}
+            && <h3 style = {numberStyle}><span role="img" aria-label="question">❓</span></h3>}
         </td>
     );
 }
