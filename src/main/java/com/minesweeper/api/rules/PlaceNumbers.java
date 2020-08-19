@@ -25,7 +25,7 @@ private final Logger log = LoggerFactory.getLogger(AddMines.class);
 	}
 	
 	@Action
-	public void outNumbersInBombNeighboringLockers(@Fact("game") Game game) {
+	public void putNumbersInBombNeighboringLockers(@Fact("game") Game game) {
 		for (int i = 0; i < game.getY(); i++) {
 			for (int j = 0; j < game.getX(); j++) {
 		    	Locker locker = game.getLockers().get(i).get(j);
