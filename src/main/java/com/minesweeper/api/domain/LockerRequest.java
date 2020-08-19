@@ -14,7 +14,7 @@ public class LockerRequest {
 	
 	private LockerType lockerType;
 	@NotNull @Max(value = 30l, message = "not valid column value") private Integer x;
-	@NotNull @Max(value = 30l, message = "not valid column value") private Integer y;
+	@NotNull @Max(value = 16l, message = "not valid row value") private Integer y;
 	
 	private boolean exposed = false;
     

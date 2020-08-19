@@ -5,6 +5,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +54,7 @@ public class GameResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/games")
-    public ResponseEntity<Game> createGame(@RequestBody GameRequest game) throws URISyntaxException {
+    public ResponseEntity<Game> createGame(@RequestBody @Valid GameRequest game) throws URISyntaxException {
         log.debug("REST request to save Game : {}", game);
         Game result = gameService.save(game);
         return ResponseEntity.created(new URI("/api/games/" + result.getId()))
