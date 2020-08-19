@@ -94,7 +94,7 @@ class Games extends Component {
             <input type="submit" value="Submit" />
           </form>
         }
-        {this.state && this.state.status &&
+        {this.state && this.state.gameStatus &&
           <>
           <Board game={this.state} onClickLocker = {this.fetchPutLocker} onClickFlag = {this.fetchPutLockerFlag}></Board>
           <a href="/">Default Game</a>
