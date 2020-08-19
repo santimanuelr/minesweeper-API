@@ -2,8 +2,8 @@
 
 ## What I used
 
-I used rules engine from [https://www.jeasy.org/](https://www.jeasy.org/) and Cucumber for testing [https://cucumber.io/](https://cucumber.io/)
-For the client api I used ReactJS
+I used rules engine from [https://www.jeasy.org/](https://www.jeasy.org/) and Cucumber for testing [https://cucumber.io/](https://cucumber.io/). 
+For the client api, I used ReactJS.
 
 ## Urls to test this project
 
