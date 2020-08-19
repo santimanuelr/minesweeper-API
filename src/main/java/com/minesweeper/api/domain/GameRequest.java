@@ -3,7 +3,9 @@ package com.minesweeper.api.domain;
 import java.io.Serializable;
 import java.util.List;
 
-import com.minesweeper.api.domain.enume.GameStatus;
+import javax.validation.constraints.Min;
+
+import com.minesweeper.api.domain.enums.GameStatus;
 
 /**
  * A Game Request
@@ -88,11 +90,11 @@ public class GameRequest implements Serializable {
 		this.y = y;
 	}
 
-	public GameStatus getStatus() {
+	public GameStatus getGameStatus() {
 		return status;
 	}
 
-	public void setStatus(GameStatus gameStatus) {
+	public void setGameStatus(GameStatus gameStatus) {
 		this.status = gameStatus;
 	}
 	

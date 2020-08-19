@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import com.minesweeper.api.domain.Game;
 import com.minesweeper.api.domain.LockerRequest;
-import com.minesweeper.api.domain.enume.GameStatus;
+import com.minesweeper.api.domain.enums.GameStatus;
 
 @Rule(name = "CheckBombLocker", description = "Check if a given Point has a bomb in the locker")
 public class CheckBombLocker {
@@ -32,7 +32,7 @@ public class CheckBombLocker {
 			log.info("CheckBomb: {} - {}", l.getPoint().toString(), point.toString());
 			return l.getPoint().equals(point);
 		}).findAny().isPresent()) {
-			game.setStatus(GameStatus.LOST);
+			game.setGameStatus(GameStatus.LOST);
 			throw new Exception("Game over");
 		}
 	}

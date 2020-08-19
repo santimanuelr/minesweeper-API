@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import com.minesweeper.api.domain.Game;
 import com.minesweeper.api.domain.LockerRequest;
-import com.minesweeper.api.domain.enume.LockerType;
+import com.minesweeper.api.domain.enums.LockerType;
 
 @Rule(name = "CheckBlankLocker", description = "Check if a given Point has a blank locker and shows all their neighboring lockers")
 public class CheckBlankLocker {
@@ -17,7 +17,7 @@ public class CheckBlankLocker {
 	private final Logger log = LoggerFactory.getLogger(CheckBlankLocker.class);
 	
 	@Condition
-	public boolean isBlankLocker(@Fact("request") LockerRequest lockerRequest, @Fact("game") Game game) {
+	public boolean isExposeRequestLocker(@Fact("request") LockerRequest lockerRequest, @Fact("game") Game game) {
 		return !game.isLost() && lockerRequest.isExposed();
 	}
 	

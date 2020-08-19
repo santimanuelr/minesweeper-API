@@ -5,6 +5,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,7 +80,7 @@ public class LockerResource {
      * @throws Exception 
      */
     @PutMapping("/lockers")
-    public ResponseEntity<Game> updateLocker(@RequestBody LockerRequest locker) throws Exception {
+    public ResponseEntity<Game> updateLocker(@RequestBody @Valid LockerRequest locker) throws Exception {
         log.debug("REST request to update Locker : {}", locker);
         if (locker.getIdGame() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid id");

@@ -14,7 +14,7 @@ import com.minesweeper.api.domain.BombLocker;
 import com.minesweeper.api.domain.Game;
 import com.minesweeper.api.domain.Locker;
 import com.minesweeper.api.domain.LockerRequest;
-import com.minesweeper.api.domain.enume.LockerType;
+import com.minesweeper.api.domain.enums.LockerType;
 
 @Rule(name = "AddMines", description = "Add mines to the board in random points", priority = 1)
 public class AddMines {
@@ -22,12 +22,12 @@ public class AddMines {
 	private final Logger log = LoggerFactory.getLogger(AddMines.class);
 
 	@Condition
-	public boolean notHasMinesSet(@Fact("game") Game game) {
+	public boolean minesHaveNotBeenSet(@Fact("game") Game game) {
 		return true;
 	}
 	
 	@Action
-	public void showBlankNeighboringLockers(@Fact("game") Game game) {
+	public void setBombsInRandomLockers(@Fact("game") Game game) {
 		Random random = new Random();
 	    int mines = game.getMinesCount();
 	    

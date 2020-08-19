@@ -1,14 +1,19 @@
 package com.minesweeper.api.domain;
 
-import com.minesweeper.api.domain.enume.LockerType;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
+import com.minesweeper.api.domain.enums.LockerType;
+import com.minesweeper.api.domain.validators.ValidLockerRequest;
+
+@ValidLockerRequest
 public class LockerRequest {
 	
-    private String idGame;
+    @NotBlank private String idGame;
 	
 	private LockerType lockerType;
-	private Integer x;
-	private Integer y;
+	@NotNull private Integer x;
+	@NotNull private Integer y;
 	
 	private boolean exposed = false;
     
