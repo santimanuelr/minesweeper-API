@@ -1,5 +1,6 @@
 package com.minesweeper.api.domain;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -12,8 +13,8 @@ public class LockerRequest {
     @NotBlank private String idGame;
 	
 	private LockerType lockerType;
-	@NotNull private Integer x;
-	@NotNull private Integer y;
+	@NotNull @Max(value = 30l, message = "not valid column value") private Integer x;
+	@NotNull @Max(value = 30l, message = "not valid column value") private Integer y;
 	
 	private boolean exposed = false;
     

@@ -3,6 +3,7 @@ package com.minesweeper.api.domain;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 import com.minesweeper.api.domain.enums.GameStatus;
@@ -18,9 +19,9 @@ public class GameRequest implements Serializable {
 	
     private String name;
     
-    private Integer x;
+    @Max(value = 30l, message = "not valid column value") private Integer x;
 
-    private Integer y;
+    @Max(value = 16l, message = "not valid row value") private Integer y;
     
     private List<List<Locker>> lockers;
     
