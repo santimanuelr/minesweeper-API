@@ -2,7 +2,7 @@ Feature: Game Minesweeper logic
 
 	Scenario: User creates a new default game
 	    When the user starts new default game
-	    Then the mines board has 9 rows, 9 columns and 3 mines
+	    Then the mines board has 9 rows, 9 columns and 6 mines
 	
 	Scenario: User creates a new default game and mark a locker with a question
 	    When the user starts new default game

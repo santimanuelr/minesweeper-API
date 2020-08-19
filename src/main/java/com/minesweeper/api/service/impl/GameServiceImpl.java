@@ -10,7 +10,9 @@ import org.jeasy.rules.core.DefaultRulesEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.minesweeper.api.domain.Game;
 import com.minesweeper.api.domain.GameRequest;
@@ -74,7 +76,7 @@ public class GameServiceImpl implements GameService {
 		if (game == null) {
 			Optional<Game> gameOptional = gameRepository.findById(lr.getIdGame());
 			if (gameOptional.isEmpty()) {
-				throw new Exception();
+				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid id");
 			} else {
 				game = gameOptional.get();
 			}

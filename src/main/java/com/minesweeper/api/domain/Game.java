@@ -8,7 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import com.minesweeper.api.domain.enume.GameStatus;
+import com.minesweeper.api.domain.enums.GameStatus;
 
 /**
  * A Game.
@@ -179,11 +179,11 @@ public class Game implements Serializable {
 		this.y = y;
 	}
 
-	public GameStatus getStatus() {
+	public GameStatus getGameStatus() {
 		return status;
 	}
 
-	public void setStatus(GameStatus gameStatus) {
+	public void setGameStatus(GameStatus gameStatus) {
 		this.status = gameStatus;
 	}
 	

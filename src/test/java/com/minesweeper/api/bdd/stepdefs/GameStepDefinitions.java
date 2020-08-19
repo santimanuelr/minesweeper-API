@@ -15,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.minesweeper.api.domain.Game;
 import com.minesweeper.api.domain.Locker;
 import com.minesweeper.api.domain.LockerRequest;
-import com.minesweeper.api.domain.enume.GameStatus;
-import com.minesweeper.api.domain.enume.LockerType;
+import com.minesweeper.api.domain.enums.GameStatus;
+import com.minesweeper.api.domain.enums.LockerType;
 import com.minesweeper.api.service.GameService;
 
 import io.cucumber.java.en.And;
@@ -129,12 +129,12 @@ public class GameStepDefinitions {
 	
 	@Then("^the game is over$")
 	public void theGameIsOverAndLost() throws Throwable {
-		assertEquals(GameStatus.LOST, this.game.getStatus());
+		assertEquals(GameStatus.LOST, this.game.getGameStatus());
     }
 	
 	@Then("^the game continues$")
 	public void theGameContinues() throws Throwable {
-		assertEquals(GameStatus.IN_PLAY, this.game.getStatus());
+		assertEquals(GameStatus.IN_PLAY, this.game.getGameStatus());
     }
 	
 }

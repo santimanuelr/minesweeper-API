@@ -1,4 +1,4 @@
-package com.minesweeper.api.domain.enume;
+package com.minesweeper.api.domain.enums;
 
 /**
  * The LockerType enumeration.

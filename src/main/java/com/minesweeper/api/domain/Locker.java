@@ -3,7 +3,7 @@ package com.minesweeper.api.domain;
 import java.awt.Point;
 import java.io.Serializable;
 
-import com.minesweeper.api.domain.enume.LockerType;
+import com.minesweeper.api.domain.enums.LockerType;
 
 /**
  * A Locker.

@@ -1,15 +1,12 @@
 package com.minesweeper.api.domain;
 
-import com.minesweeper.api.domain.enume.LockerType;
+import com.minesweeper.api.domain.enums.LockerType;
 
 public class NumberLocker extends Locker {
 	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private Integer number;
-	
 	
 	
 	public NumberLocker(Integer number) {
@@ -24,7 +21,5 @@ public class NumberLocker extends Locker {
 	public void setNumber(Integer number) {
 		this.number = number;
 	}
-	
-	
 
 }
