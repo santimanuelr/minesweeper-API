@@ -6,7 +6,7 @@ const Board = ({ game, onClickLocker, onClickFlag }) => {
         <div>
             <center style={{"backgroundColor":"paleturquoise"}}>
                 <h1>Mine Sweeper</h1>
-                {game.status === "IN_PLAY" &&
+                {game.gameStatus === "IN_PLAY" &&
                     <table id = "board">
                     {game.lockers.map(row => (
                         <tr>
@@ -19,8 +19,8 @@ const Board = ({ game, onClickLocker, onClickFlag }) => {
                     ))}
                     </table>
                 }
-                {game.status === "LOST" && <h2>Game Over</h2>}
-                {game.status === "WON" && <h2>You WIN!</h2>}
+                {game.gameStatus === "LOST" && <h2>Game Over</h2>}
+                {game.gameStatus === "WON" && <h2>You WIN!</h2>}
             </center>
         </div>  
     );
