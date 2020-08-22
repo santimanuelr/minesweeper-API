@@ -38,26 +38,26 @@ const Locker = ({ idGame, locker, onClickLocker, onClickFlag }) => {
 
                 {locker && !locker.exposed && locker.flag && 
                     <button style={square}
-                        onClick={() => onClickFlag(idGame, locker.point.x, locker.point.y, false, false, true)}>
+                        onClick={async () => onClickFlag(idGame, locker.point.x, locker.point.y, false, false, true)}>
                         <span role="img" aria-label="flag">⛳️</span>
                     </button>
                 }
                 {locker && !locker.exposed && !locker.flag && 
                     <button style={square}
-                        onClick={() => onClickFlag(idGame, locker.point.x, locker.point.y, true, false, false)}>
+                        onClick={async () => onClickFlag(idGame, locker.point.x, locker.point.y, true, false, false)}>
                         <span role="img" aria-label="flag">⛳️</span>
                     </button>
                 }
 
                 {locker && !locker.exposed && locker.question &&
                     <button style={square} 
-                        onClick={() => onClickFlag(idGame, locker.point.x, locker.point.y, false, false, true)}>
+                        onClick={async () => onClickFlag(idGame, locker.point.x, locker.point.y, false, false, true)}>
                         <span role="img" aria-label="question">❓</span>
                     </button>
                 }
                 {locker && !locker.exposed && !locker.question &&
                     <button style={square} 
-                        onClick={() => onClickFlag(idGame, locker.point.x, locker.point.y, false, true, false)}>
+                        onClick={async () => onClickFlag(idGame, locker.point.x, locker.point.y, false, true, false)}>
                         <span role="img" aria-label="question">❓</span>
                     </button>
                 }
