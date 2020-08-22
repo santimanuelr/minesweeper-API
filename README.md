@@ -11,6 +11,9 @@ For the client api, I used ReactJS.
 
 And the java project was upload to Heroku -> [https://minesweeper-java-api.herokuapp.com/api/games](https://minesweeper-java-api.herokuapp.com/api/games)
 
+## Next steps
+
+Pull Request with more features and improvements -> [https://github.com/santimanuelr/minesweeper-API/pull/7](https://github.com/santimanuelr/minesweeper-API/pull/7)
 
 ## The Game
 Develop the classic game of [Minesweeper](https://en.wikipedia.org/wiki/Minesweeper_(video_game))
