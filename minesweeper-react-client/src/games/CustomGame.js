@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './../App.css';
 import './CustomGames.css';
 import Board from '../components/Board';
-import { API_URL_LOCKERS, API_URL } from '../api'
+import {API_URL, putLockerActions, fetchPutLocker} from '../api'
 
 class Games extends Component {
 
@@ -29,49 +29,14 @@ class Games extends Component {
       .catch(console.log);
   }
 
-  fetchPutLockerFlag = (idGame, x, y, flag, question) => {
-    const requestOptionsPut = {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        idGame: idGame,
-        x:x,
-        y:y,
-        exposed:false,
-        question:question,
-        flag:flag,
-        uncheck:false
-      })
-    };
-    fetch(API_URL_LOCKERS, requestOptionsPut)
-    .then(res => res.json())
-    .then(data => {
-      this.setState(data);
-    })
-    .catch(console.log);
+  fetchPutLockerFlag = async (idGame, x, y, flag, question, uncheck) => {
+    const response = await putLockerActions(idGame, x, y, flag, question, uncheck)
+    this.setState(response);
   }
 
-  fetchPutLocker = (idGame, x, y) => {
-    const requestOptionsPut = {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        idGame: idGame,
-        x:x,
-        y:y,
-        exposed:true,
-        question:false,
-        flag:false,
-        uncheck:false
-      })
-    };
-
-    fetch(API_URL_LOCKERS, requestOptionsPut)
-    .then(res => res.json())
-    .then(data => {
-      this.setState(data);
-    })
-    .catch(console.log);
+  fetchPutLocker = async (idGame, x, y) => {
+    let result = await fetchPutLocker(idGame, x, y);
+    this.setState(result);
   }
   
   handleChange = (event) => {
